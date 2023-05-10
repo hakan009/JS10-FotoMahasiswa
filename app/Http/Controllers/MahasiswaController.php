@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class MahasiswaController extends Controller
 {
@@ -185,6 +186,14 @@ class MahasiswaController extends Controller
         $Matakuliah = Matakuliah::all();
         $Mahasiswa_MataKuliah = Mahasiswa_MataKuliah::where('mahasiswa_id','=',$Nim)->get();
         return view('mahasiswas.detailnilai',['Mahasiswa' => $Mahasiswa],['MahasiswaMataKuliah' => $Mahasiswa_MataKuliah], compact('Mahasiswa_MataKuliah'));
+    }
+
+    public function cetak_pdf($Nim){
+        $Mahasiswa = Mahasiswa::find($Nim);
+        $Matakuliah = Matakuliah::all();
+        $MahasiswaMataKuliah = Mahasiswa_MataKuliah::where('mahasiswa_id','=',$Nim)->get();
+        $pdf = PDF::loadview('mahasiswas.detailnilai_pdf', compact('Mahasiswa','MahasiswaMataKuliah'));
+        return $pdf->stream();
     }
 
 };
