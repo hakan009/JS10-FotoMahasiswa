@@ -12,8 +12,7 @@
                 <div class="card-body">
                     @if ($errors->any())
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your i
-nput.<br><br>
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
 
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -23,7 +22,7 @@ nput.<br><br>
                 </div>
                 @endif
 
-                <form method="post" action="{{ route('mahasiswa.store') }}" id="myForm">
+                <form method="post" action="{{ route('mahasiswa.store') }}" id="myForm" enctype="multipart/form-data">
                 @csrf
                     <div class="form-group">
                         <label for="Nim">Nim</label> 
@@ -34,8 +33,16 @@ nput.<br><br>
                         <input type="Nama" name="Nama" class="form-control" id="Nama" aria-describedby="Nama" > 
                     </div>
                     <div class="form-group">
-                        <label for="Kelas">Kelas</label> 
-                        <input type="Kelas" name="Kelas" class="form-control" id="Kelas" aria-describedby="password" > 
+                        <label for="image">Foto</label> 
+                        <input type="file" name="image" required="required" class="form-control" id="Foto" aria-describedby="Foto" > 
+                    </div>
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+                        <select name="kelas" class="form-control">
+                            @foreach ($kelas as $Kelas)
+                            <option value="{{$Kelas->id}}">{{$Kelas->nama_kelas}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label> 

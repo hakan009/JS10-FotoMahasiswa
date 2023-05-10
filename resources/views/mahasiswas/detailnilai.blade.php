@@ -21,11 +21,11 @@
         </thead>
 
         <tbody>
-            @foreach ($Mahasiswa_MataKuliah as $matkul)
+        @foreach ($Mahasiswa_MataKuliah as $matkul)
             <tr>
-                <td>{{$matkul->nama_matkul}}</td>
-                <td>{{$matkul->sks}}</td>
-                <td>{{$matkul->semester}}</td>
+                <td>{{$matkul->matakuliah->nama_matkul}}</td>
+                <td>{{$matkul->matakuliah->sks}}</td>
+                <td>{{$matkul->matakuliah->semester}}</td>
                 <td>{{$matkul->nilai}}</td>
             </tr>
             @endforeach
